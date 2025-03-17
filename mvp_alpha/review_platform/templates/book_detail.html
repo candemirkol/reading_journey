@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ book.title }}</title>
+    <script src="{% static 'js/book_interactions.js' %}"></script>
+</head>
+<body>
+    <h1>{{ book.title }}</h1>
+    <p><strong>Author:</strong> {{ book.author }}</p>
+    <p><strong>Description:</strong> {{ book.description }}</p>
+    {% if book.cover %}
+        <img src="{{ book.cover.url }}" alt="Book Cover" style="max-width: 100px;">
+    {% endif %}
+
+    <!-- Button to add book to wishlist -->
+    <button data-book-id="{{ book.id }}" onclick="addToWishlist('{{ book.id }}')">Add to Wishlist</button>
+    
+    <!-- Review Form -->
+    <form method="post" action="{% url 'review_platform:submit_review' book.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Review</button>
+    </form>
+</body>
+</html>

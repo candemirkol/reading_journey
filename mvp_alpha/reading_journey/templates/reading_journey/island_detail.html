@@ -1,0 +1,18 @@
+{% extends "reading_journey/base.html" %}
+
+{% block content %}
+<h1>{{ island.name }}</h1>
+<p>This is an island.</p> <!-- Island details go inside -->
+
+{% if completed %}
+    <p>You have completed this lesson!</p>
+{% else %}
+    <p>This is the beginning of your reading journey!</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Mark as Complete</button>
+    </form>
+{% endif %}
+
+<a href="{% url 'reading_joruney:archipelago_detail' island.archipelago.id %}">Back to Section</a>
+{% endblock %}

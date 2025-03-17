@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Readalyze</title>
+</head>
+<body>
+    <h1>Welcome to Readalyze</h1>
+
+    <div>
+        <h2>Pages:</h2>
+        <script type="text/javascript">
+            const readingJourneyUrl = "{% url 'reading_journey:index' %}";
+            const reviewPlatformUrl = "{% url 'review_platform:book_list' %}";
+        </script>
+
+        <button onclick="window.location.href=readingJourneyUrl">Reading Journey</button>
+        <button onclick="window.location.href=reviewPlatformUrl">Review Platform</button>
+    </div>
+</body>
+</html>

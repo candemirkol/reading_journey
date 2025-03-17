@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Readalyze</title>
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="white-background">
+
+    <!-- Header Section -->
+    <header>
+        Review Platform<span class="reads">Reads</span>
+    </header>
+
+    <!-- Navigation Section -->
+    <nav class="secondary-nav">
+        <ul>
+            <li><a href="{% url 'books:genre_books' 'FICTION' %}">FICTION</a></li>
+            <li><a href="{% url 'books:genre_books' 'NON-FICTION' %}">NON-FICTION</a></li>
+            <li><a href="{% url 'books:genre_books' 'AUTOBIOGRAPHY' %}">AUTOBIOGRAPHY</a></li>
+            <li><a href="{% url 'books:genre_books' 'NOVELS' %}">NOVELS</a></li>
+            <li><a href="{% url 'books:genre_books' 'THRILLERS' %}">THRILLERS</a></li>
+            <li><a href="{% url 'books:genre_books' 'HISTORY' %}">HISTORY</a></li>
+            <li><a href="{% url 'books:genre_books' 'POETRY' %}">POETRY</a></li>
+            <li><a href="{% url 'books:view_wishlist' %}">WISHLIST</a></li>
+        </ul>
+    </nav>
+
+    <!-- Image Section -->
+    <div class="image-container">
+        <div class="image-overlay">
+            <img src="{% static 'css/images/homeimage.png' %}" alt="Best Books of 2024">
+            <div class="overlay-text">
+                <span class="announcement-text">Announcing the</span><br>
+                <span class="best-books">Best Books</span><br>
+                <span class="year-text">of 2024</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Book List Section -->
+    <ul class="book-list">
+        {% for book in latest_books %}
+            <li class="book">
+                <a href="{% url 'books:book_list' %}">
+                    <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" class="book-cover">
+                </a>
+            </li>
+        {% empty %}
+            <li>No books found.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Quotes Section -->
+    <div class="black-background"></div>
+    <div class="image-container">
+        <!-- Two images on one line, two below -->
+        <div class="image-box">
+            <div class="quote-image">
+                <img src="{% static 'css/images/quote1.png' %}" alt="Quote 1">
+                <div class="quote-overlay">
+                    <span class="quote-text">"Why live a single mortal life when you can live countless immortal lives."</span>
+                    <span class="quote-author">― Unknown</span>
+                </div>
+            </div>
+        </div>
+        <!-- More quote images... -->
+    </div>
+
+    <!-- Footer Section -->
+    <div class="white-thin-line"></div>
+    <div class="flex-container">
+        <div class="column company-info">COMPANY<br>About us<br>Careers<br>Terms<br>Privacy</div>
+        <div class="column work-with-us">WORK WITH US<br>Authors<br>Advertise<br>Authors & ads blog<br>API</div>
+        <div class="column connect">CONNECT<br>Instagram<br>LinkedIn<br>Facebook<br>X</div>
+    </div>
+    <div class="center">© 2024 Readalyze, Inc.</div>
+
+    <!-- JavaScript for animations -->
+    <script>
+        const imageBoxes = document.querySelectorAll(".image-box");
+        const observerOptions = { root: null, rootMargin: "0px", threshold: 0.2 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("animate-fade-in");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        imageBoxes.forEach((imageBox) => observer.observe(imageBox));
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+ {% extends "reading_journey/base.html" %}
+
+ {% block content %}
+ <h1>Journeys</h1>
+ <ul>
+    {% for journey in journeys %}
+        <li>{{ journey.name }}
+            <ul>
+                {% for archipelago in journey.archipelago_set.all %}
+                    <li><a href="{% url 'reading_journey:archipelago_detail' archipelago.id %}">{{ archipelago.name }}</a></li>
+                {% endfor %}
+            </ul> 
+        </li>
+    {% endfor %}
+ </ul>
+ {% endblock %}

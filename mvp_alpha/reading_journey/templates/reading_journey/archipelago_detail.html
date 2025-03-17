@@ -1,0 +1,16 @@
+{% extends "reading_journey/base.html" %}
+
+{% block content %}
+<h1>{{ archipelago.name }}</h1>
+<ul>
+    {% for item in islands_with_status %}
+        <li>
+            <a href="{% url 'reading_journey:island_detail' item.island.id %}">{{ item.island.name }}</a>
+            {% if item.completed %}
+                - Completed
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'reading_journey:index' %}">Back to Journeys</a>
+{% endblock %}

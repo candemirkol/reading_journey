@@ -1,0 +1,9 @@
+{% extends "reading_journey/base.html" %}
+
+{% block title %}{{ journey.name }}{% endblock %}
+
+{% block header %}{{ journey.name }}{% endblock %}
+
+{% block content %}
+<p>Type: {{ journey.type }}</p>
+{% endblock %}
